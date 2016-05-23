@@ -38,6 +38,11 @@ class TwigServiceProvider implements ServiceProviderInterface
         }));
 
         $app['twig']->addGlobal('site', $app->config('application'));
+        $app['twig']->addGlobal('current_page', '');
+        $app['twig']->addGlobal(
+            'cfp_open',
+            strtotime('now') < strtotime($app->config('application.enddate') . ' 11:59 PM')
+        );
 
         // Twig Markdown Extension
         $markdown = new Ciconia();
